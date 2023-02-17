@@ -19,11 +19,7 @@ const Category = styled(Paper)(({ theme }) => ({
 }));
 
 const GameActions = (props: Props) => {
-    const {
-        score,
-
-        username,
-    } = useAppSelector((state) => state.jeopardy);
+    const { score, username } = useAppSelector((state) => state.jeopardy);
     const dispatch = useAppDispatch();
     const navigation = useNavigate();
 

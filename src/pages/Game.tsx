@@ -15,6 +15,7 @@ const Game = () => {
         totalInCorrectAnswer,
         ids,
     } = useAppSelector((state) => state.jeopardy);
+
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -39,7 +40,7 @@ const Game = () => {
     if (error) {
         return (
             <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                <Typography>'Something went wrong'</Typography>
+                <Typography>Something went wrong</Typography>
             </Box>
         );
     }
