@@ -38,7 +38,7 @@ export default function BasicModal({ columnId, rowId, clue, value }: Props) {
 
     const handleClose = () => {
         if (timer > 0) {
-            dispatch(inCorrectAnswer({ clue, columnId, rowId }));
+            dispatch(inCorrectAnswer({ columnId, rowId }));
         }
         setOpen(false);
     };
@@ -49,7 +49,7 @@ export default function BasicModal({ columnId, rowId, clue, value }: Props) {
         if (answer.toLowerCase() === clue.answer.toLowerCase()) {
             dispatch(correctAnswer({ clue, columnId, rowId }));
         } else {
-            dispatch(inCorrectAnswer({ clue, columnId, rowId }));
+            dispatch(inCorrectAnswer({ columnId, rowId }));
         }
 
         setOpen(false);
@@ -62,7 +62,7 @@ export default function BasicModal({ columnId, rowId, clue, value }: Props) {
             }, 1000);
 
             if (timer <= 0) {
-                dispatch(inCorrectAnswer({ clue, columnId, rowId }));
+                dispatch(inCorrectAnswer({ columnId, rowId }));
                 clearTimeout(x);
                 setOpen(false);
             }

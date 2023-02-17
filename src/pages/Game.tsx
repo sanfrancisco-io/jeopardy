@@ -4,6 +4,7 @@ import { Divider } from '@mui/material';
 import { fetchJeopardyCategory, gameOver } from '../redux/jeopardySlice';
 import { useEffect } from 'react';
 import { Categories } from '../components/Game';
+import { Navigate } from 'react-router-dom';
 import GameActions from '../components/Game/GameActions';
 
 const Game = () => {
@@ -14,6 +15,7 @@ const Game = () => {
         totalCorrectAnswer,
         totalInCorrectAnswer,
         ids,
+        username,
     } = useAppSelector((state) => state.jeopardy);
 
     const dispatch = useAppDispatch();
@@ -43,6 +45,10 @@ const Game = () => {
                 <Typography>Something went wrong</Typography>
             </Box>
         );
+    }
+
+    if (!username) {
+        return <Navigate to='/' replace />;
     }
 
     return (

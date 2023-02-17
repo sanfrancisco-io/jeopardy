@@ -4,23 +4,8 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { RootState } from '.';
-import { ICategory, IClues, IJeopardyCategory, IUserHistory } from '../types';
+import { IClues, IJeopardyCategory, JoepardyState } from '../types';
 import $api from '../utils/axios';
-
-interface JoepardyState {
-    username: string;
-    userHistory: IUserHistory[];
-    loading: boolean;
-    error: null | string | undefined;
-    ids: number[];
-    category: ICategory[];
-    entities: {};
-    score: number;
-    totalCorrectAnswer: number;
-    totalInCorrectAnswer: number;
-    startDate: string;
-    endDate: string;
-}
 
 const initialState: JoepardyState = {
     username: '',
@@ -80,7 +65,7 @@ export const jeopardySlice = createSlice({
         },
 
         inCorrectAnswer(state, action) {
-            const { clue, columnId, rowId } = action.payload;
+            const { columnId, rowId } = action.payload;
 
             state.category[columnId].clues[rowId] = {
                 ...state.category[columnId].clues[rowId],
@@ -88,7 +73,6 @@ export const jeopardySlice = createSlice({
             };
 
             state.totalInCorrectAnswer += 1;
-            state.score -= clue.value;
         },
 
         gameOver(state, action) {

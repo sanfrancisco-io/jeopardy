@@ -1,3 +1,18 @@
+export interface JoepardyState {
+    username: string;
+    userHistory: IUserHistory[];
+    loading: boolean;
+    error: null | string | undefined;
+    ids: number[];
+    category: ICategory[];
+    entities: {};
+    score: number;
+    totalCorrectAnswer: number;
+    totalInCorrectAnswer: number;
+    startDate: string;
+    endDate: string;
+}
+
 export interface IJeopardyCategory {
     id: number;
     clues_count: number;
