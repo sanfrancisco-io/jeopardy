@@ -42,7 +42,7 @@ const Login = (props: Props) => {
             />
 
             <Button onClick={setUserName} variant='contained' color='success'>
-                Accept
+                Start game
             </Button>
         </Box>
     );
