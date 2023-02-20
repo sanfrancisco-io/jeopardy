@@ -4,14 +4,14 @@ import {
     createSlice,
 } from '@reduxjs/toolkit';
 import { RootState } from '.';
-import { IClues, IJeopardyCategory, JoepardyState } from '../types';
+import { IClues, IJeopardyCategory, JoepardyState, ICategory } from '../types';
 import $api from '../utils/axios';
 
 const initialState: JoepardyState = {
     username: '',
     userHistory: [],
     loading: false,
-    error: null as null | string | undefined,
+    error: null,
     category: [],
     ids: [],
     entities: {},
@@ -112,20 +112,18 @@ export const jeopardySlice = createSlice({
         builder.addCase(fetchJeopardyCategory.fulfilled, (state, action) => {
             jeopardyAdapter.setAll(state, action.payload.data);
 
-            state.category = action.payload.category.map((item) => {
+            state.category = action.payload.category.map((item: ICategory) => {
                 return {
                     ...item,
                     clues: item.clues
                         .map((clue: IClues) => {
-                            if (!clue.value) {
-                                return { ...clue, value: 200 };
-                            } else {
-                                return clue;
-                            }
+                            if (!clue.value) return { ...clue, value: 200 };
+
+                            return clue;
                         })
                         .slice(0, 5)
                         .sort((a: IClues, b: IClues) => a.value - b.value),
-                    clues_count: 5,
+                    clues_count: item.clues.length,
                 };
             });
 
